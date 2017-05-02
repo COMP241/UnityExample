@@ -1,17 +1,35 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GetRequestExample : MonoBehaviour
 {
-    // Start has to be a coroutine here so it can use yield
+    private ImageMap map;
+    
     IEnumerator Start()
     {
-        int levelCode = 0;
-        string url = string.Format("128.199.159.24/api/map/{0}", levelCode);
+        int id = 0; // Change this for user inputted id
+        using (UnityWebRequest www = UnityWebRequest.Get("http://papermap.tk/api/map/" + id))
+        {
+            yield return www.Send();
 
-        var www = new WWW(url);
-        yield return www; // Wait for request to complete
+            if (!www.isError)
+            {
+                map = ImageMap.FromJson(www.downloadHandler.text);
+                DoStuff();
+            }
+            else
+            {
+                Debug.Log(www.error);
+            }
+        }
+    }
 
-        Debug.Log(www.text); // Process returned text, in future should create object from returned json
+    void DoStuff()
+    {
+        // Now do stuff with map, for example, turn this class into a "LevelGenerator" MonoBehaviour and start creating objects in the level based off the map data
+        Debug.Log(map.Ratio);
+        Debug.Log(map.Id);
+        Debug.Log(map.Lines);
     }
 }
