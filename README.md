@@ -1,6 +1,6 @@
 # Digital Paper Game Example Project
 
-Either clone this project and start, or do the following in your Unity project:
+Either fork this project and start (or clone and change remote), or do the following in your Unity project:
 
 1. Add this project's .gitignore.
 2. Go to `Edit > Project Settings > Editor > Asset Serialization` and ensure it is Force Text.
