@@ -28,8 +28,6 @@ public class GetRequestExample : MonoBehaviour
     void DoStuff()
     {
         // Now do stuff with map, for example, turn this class into a "LevelGenerator" MonoBehaviour and start creating objects in the level based off the map data
-        Debug.Log(map.Ratio);
-        Debug.Log(map.Id);
-        Debug.Log(map.Lines);
+        Debug.Log(map.ToString());
     }
 }
